@@ -1,0 +1,10 @@
+gestor_datos_startup/
+├── main.py # Menú principal + bucle while
+├── data/
+│ ├── usuarios.py # Lista usuarios, funciones add/find/filter
+│ └── productos.py # Dict productos, add/update/delete/list
+├── services/
+│ └── estadisticas.py # Funciones calc edad media, min/max, precio medio
+├── utils/
+│ └── validaciones.py # Try/except para inputs ID/edad/precio/ciudad
+└── README.md # Descripción proyecto + uso
