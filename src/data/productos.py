@@ -10,16 +10,21 @@ class Producto:
         self.dict_productos[nombre_producto] = valor_producto
         
     def modificar_precio_producto(self, nombre_producto: str, valor_producto: float):
-        try:
+        if nombre_producto in self.dict_productos:
             self.dict_productos[nombre_producto] = valor_producto
-        except:
-            print("Producto no existe")
+        else:
+            print("❌ Producto no existe")
             
     def eliminar_producto(self, nombre_producto: str):
-        try:
+        if nombre_producto in self.dict_productos:
             del self.dict_productos[nombre_producto]
-        except:
-            print("Producto no existe")
+            print("✅ Producto eliminado")
+        else:
+            print("❌ Producto no existe")
             
     def mostrar_productos(self):
-        print(self.dict_productos)
+        if self.dict_productos:
+            for nombre, precio in self.dict_productos.items():
+                print(f"📦 {nombre}: €{precio:.2f}")
+        else:
+            print("📭 Catálogo vacío")
