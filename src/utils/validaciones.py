@@ -53,7 +53,6 @@ class Validaciones:
 
     @staticmethod
     def validar_usuario_completo():
-        """Devuelve tupla usuario validada o None"""
         id_u = Validaciones.validar_id(input("🆔 ID: "))
         if not id_u: return None
         

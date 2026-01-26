@@ -1,10 +1,8 @@
-# services/estadisticas.py
 from typing import Dict, Any, List, Tuple
 from dataclasses import dataclass, field
 
 @dataclass
 class EstadisticasUsuarios:
-    """Clase para estadísticas de usuarios"""
     usuarios_list: List[Tuple[int, str, int, str]] = field(default_factory=list)
     
     def calcular(self) -> Dict[str, Any]:
@@ -36,7 +34,6 @@ class EstadisticasUsuarios:
 
 @dataclass
 class EstadisticasProductos:
-    """Clase para estadísticas de productos"""
     productos_dict: Dict[str, float] = field(default_factory=dict)
     
     def calcular(self) -> Dict[str, float]:
