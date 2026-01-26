@@ -1,6 +1,5 @@
-# src/main.py
 from data.usuarios import GestorUsuarios
-from data.productos import Producto  # Asumiendo tienes data/productos.py
+from data.productos import Producto
 from services.estadisticas import EstadisticasUsuarios, EstadisticasProductos
 from utils.validaciones import Validaciones
 
@@ -21,7 +20,6 @@ def mostrar_menu_principal():
     print("="*60)
 
 def main():
-    # Instancias globales
     gestor_usuarios = GestorUsuarios()
     catalogo_productos = Producto("Catálogo General", 0.0)
     
@@ -65,11 +63,8 @@ def main():
             catalogo_productos.mostrar_productos()
             
         elif op == "9":
-            # Estadísticas usuarios
             stats_usuarios = EstadisticasUsuarios(gestor_usuarios.obtener_usuarios())
             stats_usuarios.mostrar()
-            
-            # Estadísticas productos
             stats_productos = EstadisticasProductos(catalogo_productos.dict_productos)
             stats_productos.mostrar()
             
