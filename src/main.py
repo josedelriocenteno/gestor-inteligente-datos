@@ -1,40 +1,67 @@
-usuarios = []
-productos = {}
+# main.py
+from data.usuarios import anadir_usuario, mostrar_usuarios, buscar_por_ciudad, buscar_por_id
+from data.productos import anadir_producto, mostrar_productos, modificar_producto, eliminar_producto
+from services.estadisticas import mostrar_estadisticas
+from utils.validaciones import Validaciones
 
-def anadir_usuario():
-    try:
-        id_u = int(input("ID: "))
-        nombre = input("Nombre: ")
-        edad = int(input("Edad: "))
-        ciudad = input("Ciudad: ")
-        usuarios.append((id_u, nombre, edad, ciudad))
-        print("Añadido.")
-    except ValueError:
-        print("ID/edad inválidos.")
+def mostrar_menu():
+    print("\n" + "="*50)
+    print("🛒 GESTOR INTELIGENTE DE DATOS - STARTUP")
+    print("="*50)
+    print("1.  ➕ Añadir usuario")
+    print("2.  📋 Mostrar usuarios")
+    print("3.  🔍 Buscar usuarios por ciudad")
+    print("4.  🆔 Buscar usuario por ID")
+    print("5.  📦 Añadir producto")
+    print("6.  💰 Modificar precio producto")
+    print("7.  🗑️  Eliminar producto")
+    print("8.  📊 Mostrar productos")
+    print("9.  📈 ESTADÍSTICAS")
+    print("0.  ❌ SALIR")
+    print("="*50)
 
-def mostrar_usuarios():
-    for u in usuarios:
-        print(u)
+def main():
+    print("🚀 Iniciando Gestor Inteligente de Datos...")
+    
+    while True:
+        mostrar_menu()
+        opcion = input("Elige opción (0-9): ").strip()
+        
+        try:
+            if opcion == "1":
+                anadir_usuario()
+            elif opcion == "2":
+                mostrar_usuarios()
+            elif opcion == "3":
+                ciudad = input("Ciudad a buscar: ").strip()
+                buscar_por_ciudad(ciudad)
+            elif opcion == "4":
+                id_buscar = input("ID a buscar: ")
+                buscar_por_id(id_buscar)
+            elif opcion == "5":
+                anadir_producto()
+            elif opcion == "6":
+                nombre = input("Nombre producto: ").strip()
+                precio_nuevo = input("Nuevo precio: ")
+                modificar_producto(nombre, precio_nuevo)
+            elif opcion == "7":
+                nombre = input("Nombre a eliminar: ").strip()
+                eliminar_producto(nombre)
+            elif opcion == "8":
+                mostrar_productos()
+            elif opcion == "9":
+                mostrar_estadisticas()
+            elif opcion == "0":
+                print("👋 ¡Gracias por usar el Gestor!")
+                break
+            else:
+                print("❌ Opción inválida (0-9)")
+                
+        except KeyboardInterrupt:
+            print("\n\n⏹️  Saliendo...")
+            break
+        except Exception as e:
+            print(f"❌ Error: {e}")
 
-def estadisticas():
-    if usuarios:
-        edades = [u[2] for u in usuarios]
-        print(f"Usuarios: {len(usuarios)}, Media edad: {sum(edades)/len(usuarios):.1f}")
-        print(f"Más joven: {min(usuarios, key=lambda x: x[2])}")
-        print(f"Más mayor: {max(usuarios, key=lambda x: x[2])}")
-    if productos:
-        precios = list(productos.values())
-        print(f"Productos: {len(productos)}, Precio medio: {sum(precios)/len(precios):.2f}")
-
-# Añade resto: anadir_producto(), modificar_producto(), eliminar_producto(), mostrar_productos(),
-# buscar_ciudad(), buscar_id() similar.
-
-while True:
-    print("\n1.Añadir usuario 2.Mostrar usuarios 3.Añadir producto 4.Mostrar productos")
-    print("5.Estadísticas 6.Búsquedas 7.Salir")
-    op = input("Elige: ")
-    if op == "1": anadir_usuario()
-    elif op == "2": mostrar_usuarios()
-    elif op == "5": estadisticas()
-    elif op == "7": break
-    else: print("Opción inválida.")
+if __name__ == "__main__":
+    main()
