@@ -5,7 +5,7 @@ from utils.validaciones import Validaciones
 
 def mostrar_menu_principal():
     print("\n" + "="*60)
-    print("🛒 GESTOR INTELIGENTE DE DATOS - STARTUP DAM 25-26")
+    print("🛒 GESTOR INTELIGENTE DE DATOS")
     print("="*60)
     print("1️⃣  ➕ Añadir usuario")
     print("2️⃣  📋 Mostrar usuarios") 
