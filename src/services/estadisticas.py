@@ -1,6 +1,7 @@
 from typing import Dict, Any, List, Tuple
 from dataclasses import dataclass, field
 
+
 @dataclass
 class EstadisticasUsuarios:
     usuarios_list: List[Tuple[int, str, int, str]] = field(default_factory=list)
@@ -25,12 +26,13 @@ class EstadisticasUsuarios:
     
     def mostrar(self):
         stats = self.calcular()
-        print(f"👥 USUARIOS: {stats['total']}")
-        print(f"📊 Edad media: {stats['edad_media']} años")
+        print(f"USUARIOS: {stats['total']}")
+        print(f"Edad media: {stats['edad_media']} años")
         if stats['mas_joven']:
-            print(f"👶 Más joven: {stats['mas_joven']}")
+            print(f"Mas joven: {stats['mas_joven']}")
         if stats['mas_mayor']:
-            print(f"👴 Más mayor: {stats['mas_mayor']}")
+            print(f"Mas mayor: {stats['mas_mayor']}")
+
 
 @dataclass
 class EstadisticasProductos:
@@ -51,5 +53,5 @@ class EstadisticasProductos:
     
     def mostrar(self):
         stats = self.calcular()
-        print(f"📦 PRODUCTOS: {stats['total']}")
-        print(f"💰 Precio medio: €{stats['precio_medio']}")
+        print(f"PRODUCTOS: {stats['total']}")
+        print(f"Precio medio: €{stats['precio_medio']}")
