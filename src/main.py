@@ -28,6 +28,10 @@ def mostrar_productos():
         print("Catalogo vacio")
 
 def registrar_usuario(id_usuario, nombre, edad, ciudad):
+    for u in usuarios:
+        if u[0] == id_usuario:
+            print("ID ya existe, elige otro")
+            return
     usuario = (id_usuario, nombre, edad, ciudad)
     usuarios.append(usuario)
     print("Usuario", nombre, "registrado ID:", id_usuario)
@@ -206,13 +210,13 @@ def main():
                 continue         
             nom = validar_nombre(input("Nombre: "))
             if nom is None:
-                continue            
+                continue             
             ed = validar_edad(input("Edad: "))
             if ed is None:
                 continue             
             ciu = validar_ciudad(input("Ciudad: "))
             if ciu is None:
-                continue            
+                continue             
             registrar_usuario(id_u, nom, ed, ciu)
                 
         elif op == "2":
