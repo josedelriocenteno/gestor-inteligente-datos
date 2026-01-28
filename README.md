@@ -1,1 +1,0 @@
-# gestor-inteligente-datos
