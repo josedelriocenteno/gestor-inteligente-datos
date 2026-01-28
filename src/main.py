@@ -42,7 +42,10 @@ def mostrar_usuarios():
         print(i, "ID:", u[0], u[1], u[2], "años", u[3])
 
 def buscar_por_ciudad(ciudad):
-    encontrados = [u for u in usuarios if u[3].lower() == ciudad.lower()]
+    encontrados = []
+    for u in usuarios:
+        if u[3].lower() == ciudad.lower():
+            encontrados.append(u)
     if encontrados:
         print("Usuarios en", ciudad)
         for u in encontrados:
@@ -62,11 +65,23 @@ def estadisticas_usuarios(usuarios_list):
     if total_usuarios == 0:
         return {"total": 0, "edad_media": 0, "mas_joven": None, "mas_mayor": None}
     
-    edades = [u[2] for u in usuarios_list]
-    edad_media = sum(edades) / total_usuarios
+    suma_edades = 0
+    for u in usuarios_list:
+        suma_edades = suma_edades + u[2]
+    edad_media = suma_edades / total_usuarios
     
-    mas_joven = min(usuarios_list, key=lambda u: u[2])
-    mas_mayor = max(usuarios_list, key=lambda u: u[2])
+    mas_joven_edad = 999
+    mas_mayor_edad = 0
+    mas_joven = None
+    mas_mayor = None
+    
+    for u in usuarios_list:
+        if u[2] < mas_joven_edad:
+            mas_joven_edad = u[2]
+            mas_joven = u
+        if u[2] > mas_mayor_edad:
+            mas_mayor_edad = u[2]
+            mas_mayor = u
     
     return {
         "total": total_usuarios,
@@ -80,7 +95,10 @@ def estadisticas_productos(productos_dict):
     if total_productos == 0:
         return {"total": 0, "precio_medio": 0.0}
         
-    precios = list(productos_dict.values())
+    precios = []
+    for precio in productos_dict.values():
+        precios.append(precio)
+
     precio_medio = sum(precios) / total_productos
     
     return {
@@ -132,7 +150,7 @@ def validar_precio(texto):
 
 def validar_nombre(texto):
     nombre = texto.strip()
-    if 1 <= len(nombre) <= 50 and (nombre.replace(" ", "").isalpha()):
+    if 1 <= len(nombre) <= 50:
         return nombre.title()
     print("Nombre 1-50 letras")
     return None
@@ -183,9 +201,19 @@ def main():
         op = input("Elige opcion: ").strip()
         
         if op == "1":
-            usuario = validar_usuario_completo()
-            if usuario:
-                registrar_usuario(*usuario)
+            id_u = validar_id(input("ID: "))
+            if id_u is None:
+                continue         
+            nom = validar_nombre(input("Nombre: "))
+            if nom is None:
+                continue            
+            ed = validar_edad(input("Edad: "))
+            if ed is None:
+                continue             
+            ciu = validar_ciudad(input("Ciudad: "))
+            if ciu is None:
+                continue            
+            registrar_usuario(id_u, nom, ed, ciu)
                 
         elif op == "2":
             mostrar_usuarios()
